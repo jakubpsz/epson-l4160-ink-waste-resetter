@@ -51,4 +51,4 @@ try:
 except Exception as e:
     print(f'Error connecting to the printer. Verify the printer\'s IP is {PRINTER_IP}.')
     print()
-    print(traceback.print_tb(e.__traceback__))
+    traceback.print_exc()

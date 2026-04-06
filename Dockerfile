@@ -1,13 +1,15 @@
-FROM python:3.7.5
+FROM python:3.13-slim
 
-RUN apt update
-RUN apt install libsnmp-dev  -y
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libsnmp-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /code
 COPY resetter.py .
 COPY requirements.txt .
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-ENTRYPOINT python resetter.py
+ENTRYPOINT ["python", "resetter.py", "ip_address_change_me"]
 
